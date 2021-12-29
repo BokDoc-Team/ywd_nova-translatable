@@ -74,6 +74,13 @@ class Translatable extends Field
                 }
             }
         } else {
+            $data = [];
+            foreach ( $request[$requestAttribute] as $lang => $value ) {
+                if (!is_numeric($lang)){
+                    $data[$attribute][$lang] = $value;
+                }
+                $request->request->add($data);
+            }
             parent::fillAttributeFromRequest($request, $requestAttribute, $model, $attribute);
         }
     }
